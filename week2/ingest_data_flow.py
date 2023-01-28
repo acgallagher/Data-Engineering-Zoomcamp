@@ -6,8 +6,12 @@ from sqlalchemy import create_engine
 import time
 import os
 from prefect import flow, task
+from prefect.tasks import task_input_hash
+from prefect_sqlalchemy import SqlAlchemyConnector
+from datetime import timedelta
 
-@task(log_prints=True)
+
+@task(log_prints=True, tags=['extract'], cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
 def extract_data(url: str):
     csv_name = "output.csv.gz"
     os.system(f"wget -O {csv_name} {url}")
@@ -24,16 +28,15 @@ def transform_data(data):
     return data
 
 @task(log_prints=True)
-def load_data(user, password, host, port, db, table_name, data):
-    engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
-    engine.connect()
-
-    print(pd.io.sql.get_schema(data, name=table_name, con=engine))
-
-    start = time.time()
-    data.to_sql(name=table_name, con=engine, if_exists='append')
-    end = time.time()
-    print("Inserted the dataframe in {} seconds.".format(end - start))
+def load_data(table_name, data):
+    
+    connection_block = SqlAlchemyConnector.load("postgres-connector")
+    with connection_block.get_connection(begin=False) as engine:
+        data.head(n=0).to_sql(name=table_name, con=engine, if_exists='replace')
+        start = time.time()
+        data.to_sql(name=table_name, con=engine, if_exists='append')
+        end = time.time()
+        print("Inserted the dataframe in {} seconds.".format(end - start))
 
 @task(log_prints=True)
 def ingest_data(user, password, host, port, db, table_name, url):
@@ -66,17 +69,12 @@ def ingest_data(user, password, host, port, db, table_name, url):
 
 @flow(name="Ingest data")
 def main_flow():
-    user = "root"
-    password = "root"
-    host = "localhost"
-    port = "5432"
-    db = "ny_taxi"
     table_name = "green_taxi_trips"
     csv_url = "https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-01.csv.gz"
 
     raw_data = extract_data(csv_url)
     transformed_data = transform_data(raw_data)
-    load_data(user, password, host, port, db, table_name, transformed_data)
+    load_data(table_name, transformed_data)
 
 if __name__ == '__main__':
     main_flow()
