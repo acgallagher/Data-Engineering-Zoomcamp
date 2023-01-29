@@ -1,5 +1,5 @@
 ny_taxi_postgres_data/
 /.terrform
 output.csv.gz
-/venv/
-/data/
+venv/
+data/
