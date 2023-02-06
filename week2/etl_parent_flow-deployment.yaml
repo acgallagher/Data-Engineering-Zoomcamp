@@ -10,8 +10,14 @@ work_pool_name: null
 tags: []
 parameters: {}
 schedule: null
-is_schedule_active: null
+is_schedule_active: true
 infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: etl-parent-flow
+manifest_path: null
 infrastructure:
   type: process
   env: {}
@@ -20,14 +26,11 @@ infrastructure:
   command: null
   stream_output: true
   working_dir: null
+  _block_document_id: f7424ca9-55c4-4e9a-ae2b-390cc89de0c8
+  _block_document_name: anonymous-2cc0f620-f2a0-447d-8f12-0c6caa98f0bb
+  _is_anonymous: true
   block_type_slug: process
   _block_type_slug: process
-
-###
-### DO NOT EDIT BELOW THIS LINE
-###
-flow_name: etl-parent-flow
-manifest_path: null
 storage:
   repository: https://github.com/acgallagher/Data-Engineering-Zoomcamp
   reference: null
@@ -38,8 +41,8 @@ storage:
   _is_anonymous: false
   block_type_slug: github
   _block_type_slug: github
-path: week2/parameterized_flow.py
-entrypoint: parameterized_flow.py:etl_parent_flow
+path: ''
+entrypoint: week2/parameterized_flow.py:etl_parent_flow
 parameter_openapi_schema:
   title: Parameters
   type: object
@@ -71,4 +74,4 @@ parameter_openapi_schema:
         type: string
   required: null
   definitions: null
-timestamp: '2023-02-03T12:10:08.425344+00:00'
+timestamp: '2023-02-06T00:23:53.700598+00:00'
