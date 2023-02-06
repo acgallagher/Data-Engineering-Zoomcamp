@@ -4,6 +4,7 @@ from prefect import flow, task
 from prefect_gcp.cloud_storage import GcsBucket
 from prefect.tasks import task_input_hash
 from datetime import timedelta
+from prefect_dask.task_runners import DaskTaskRunner
 
 
 @task(retries=3, cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
@@ -55,7 +56,7 @@ def etl_web_to_gcs(year: int, month: int, color: str) -> None:
     write_gcs(path)
 
 
-@flow()
+@flow(task_runner=DaskTaskRunner)
 def etl_parent_flow(
     months: list[int] = [1, 2],
     years: list[int] = [2021],
@@ -69,7 +70,7 @@ def etl_parent_flow(
 
 
 if __name__ == "__main__":
-    months = [4]
-    years = [2019]
-    colors = ["green"]
+    months = [1, 2, 3, 4, 5, 6, 7]
+    years = [2021]
+    colors = ["green", "yellow"]
     etl_parent_flow(months, years, colors)

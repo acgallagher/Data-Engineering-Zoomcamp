@@ -3,6 +3,7 @@ import pandas as pd
 from prefect import flow, task
 from prefect_gcp.cloud_storage import GcsBucket
 from prefect_gcp import GcpCredentials
+from prefect_dask.task_runners import DaskTaskRunner
 
 
 @task(retries=3)
@@ -39,7 +40,7 @@ def write_bq(df: pd.DataFrame) -> None:
     )
 
 
-@flow(log_prints=True)
+@flow(log_prints=True, task_runner=DaskTaskRunner)
 def etl_gcs_to_bq(
     months: list[int] = [1, 2],
     years: list[int] = [2021],
@@ -56,7 +57,7 @@ def etl_gcs_to_bq(
 
 
 if __name__ == "__main__":
-    months = [2, 3]
-    years = [2019]
-    colors = ["yellow"]
+    months = [1, 2, 3, 4, 5, 6, 7]
+    years = [2021]
+    colors = ["green", "yellow"]
     etl_gcs_to_bq(months, years, colors)
