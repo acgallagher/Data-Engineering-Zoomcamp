@@ -1,0 +1,38 @@
+-- HW3 Setup: Create unclustered/unpartitioned table from FHV data 
+CREATE OR REPLACE EXTERNAL TABLE `de_zoomcamp.external_fhv_tripdata`
+OPTIONS (
+  format = 'CSV',
+  uris = ['gs://de_zoomcamp_data_lake/data/fhv/fhv_tripdata_2019-*.csv.gz']
+);
+
+-- Q1: What is the count for fhv vehicle records for year 2019?
+SELECT COUNT(*)
+FROM de_zoomcamp.external_fhv_tripdata;
+
+-- Q2
+CREATE OR REPLACE TABLE `de_zoomcamp.fhv_tripdata` AS
+SELECT *
+FROM `de_zoomcamp.external_fhv_tripdata`;
+
+-- Q3
+SELECT COUNT(*)
+FROM de_zoomcamp.fhv_tripdata
+WHERE PUlocationID IS NULL AND DOlocationID IS NULL;
+
+-- Q4
+DROP TABLE de_zoomcamp.fhv_tripdata_partitioned;
+CREATE TABLE de_zoomcamp.fhv_tripdata_partitioned
+PARTITION BY
+  DATE(pickup_datetime) AS
+SELECT * FROM de_zoomcamp.fhv_tripdata;
+
+-- Q5
+SELECT DISTINCT Affiliated_base_number
+FROM de_zoomcamp.fhv_tripdata
+WHERE (EXTRACT(DATE FROM pickup_datetime) >= DATE(2019, 3, 1) AND
+       EXTRACT(DATE FROM pickup_datetime) <= DATE(2019, 3, 31));
+
+SELECT DISTINCT Affiliated_base_number
+FROM de_zoomcamp.fhv_tripdata_partitioned
+WHERE (EXTRACT(DATE FROM pickup_datetime) >= DATE(2019, 3, 1) AND
+       EXTRACT(DATE FROM pickup_datetime) <= DATE(2019, 3, 31));
