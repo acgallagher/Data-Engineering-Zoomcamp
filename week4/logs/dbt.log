@@ -1,13 +1,13 @@
 
 
-============================== 2023-02-07 22:41:31.159410 | 476ba8dc-f188-41a7-b787-3902dd03e63f ==============================
-[0m22:41:31.159410 [info ] [MainThread]: Running with dbt=1.4.1
-[0m22:41:31.160450 [debug] [MainThread]: running dbt with arguments {'write_json': True, 'use_colors': True, 'printer_width': 80, 'version_check': True, 'partial_parse': True, 'static_parser': True, 'profiles_dir': '/home/andrewgallagher/.dbt', 'send_anonymous_usage_stats': True, 'quiet': False, 'no_print': False, 'cache_selected_only': False, 'skip_profile_setup': False, 'which': 'init', 'indirect_selection': 'eager'}
-[0m22:41:31.160584 [debug] [MainThread]: Tracking: tracking
-[0m22:41:31.161333 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f9d92d401d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f9d92d43010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f9d92dc7a90>]}
-[0m22:41:42.190404 [debug] [MainThread]: Starter project path: /home/andrewgallagher/Documents/Repositories/Data-Engineering-Zoomcamp/venv/lib64/python3.11/site-packages/dbt/include/starter_project
-[0m22:43:04.198085 [info ] [MainThread]: Profile de_zoomcamp written to /home/andrewgallagher/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
-[0m22:43:04.198506 [info ] [MainThread]: 
+============================== 2023-02-08 18:16:28.619133 | 89268adb-8b78-4089-a778-89c6135d9a6c ==============================
+[0m18:16:28.619133 [info ] [MainThread]: Running with dbt=1.4.1
+[0m18:16:28.620309 [debug] [MainThread]: running dbt with arguments {'write_json': True, 'use_colors': True, 'printer_width': 80, 'version_check': True, 'partial_parse': True, 'static_parser': True, 'profiles_dir': '/home/andrewgallagher/.dbt', 'send_anonymous_usage_stats': True, 'quiet': False, 'no_print': False, 'cache_selected_only': False, 'skip_profile_setup': False, 'which': 'init', 'indirect_selection': 'eager'}
+[0m18:16:28.620451 [debug] [MainThread]: Tracking: tracking
+[0m18:16:28.621266 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8e26869cd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8e26bef890>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8e26b680d0>]}
+[0m18:16:37.514886 [debug] [MainThread]: Starter project path: /home/andrewgallagher/Documents/Repositories/Data-Engineering-Zoomcamp/venv/lib64/python3.11/site-packages/dbt/include/starter_project
+[0m18:18:11.315059 [info ] [MainThread]: Profile de_zoomcamp written to /home/andrewgallagher/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m18:18:11.315496 [info ] [MainThread]: 
 Your new dbt project "de_zoomcamp" was created!
 
 For more information on how to configure the profiles.yml file,
@@ -23,5 +23,5 @@ Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
 
 Happy modeling!
 
-[0m22:43:04.198772 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f9d5f641ed0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f9d948d7250>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f9d5da8a850>]}
-[0m22:43:04.199016 [debug] [MainThread]: Flushing usage events
+[0m18:18:11.315795 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8e26717090>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8e26848850>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8e26bef890>]}
+[0m18:18:11.316073 [debug] [MainThread]: Flushing usage events

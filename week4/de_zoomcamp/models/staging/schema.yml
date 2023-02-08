@@ -3,4 +3,7 @@ version: 2
 sources:
   - name: staging
     database: arctic-study-375823
-    schema: de_zoomcamp.external_green_tripdata
+    schema: taxi_data
+
+    tables:
+      - name: green_tripdata

@@ -30,15 +30,15 @@ def clean(df: pd.DataFrame, color: str) -> pd.DataFrame:
 
 @task()
 def write_local(df: pd.DataFrame, color: str, dataset_file: str) -> Path:
-    """Write DataFrame out as a parquet file"""
-    path = Path(f"data/{color}/{dataset_file}.parquet")
-    df.to_parquet(path, compression="gzip")
+    """Write DataFrame out as a csv file"""
+    path = Path(f"data/{color}/{dataset_file}.csv.gz")
+    df.to_csv(path, compression="gzip")
     return path
 
 
 @task()
 def write_gcs(path: Path) -> None:
-    """Uploading local parquet file to GCS"""
+    """Uploading local csv file to GCS"""
     gcs_block = GcsBucket.load("zoomcamp-gcs")
     gcs_block.upload_from_path(from_path=path, to_path=path)
 
@@ -69,7 +69,7 @@ def etl_parent_flow(
 
 
 if __name__ == "__main__":
-    months = [1, 2, 3, 4, 5, 6, 7]
-    years = [2021]
+    months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    years = [2019, 2020]
     colors = ["green", "yellow"]
     etl_parent_flow(months, years, colors)
